@@ -39,8 +39,8 @@ function Particle(x,y) {
         var force = p5.Vector.sub(target, this.pos);
         var distSquared = force.magSq();
         var repel = force.mag();
-        if (repel < 20){
-            force.mult(-1);
+        if (repel < 300){
+            force.mult(-10);
         }
         distSquared = constrain(distSquared, 1, 200);
         var G = 6.67408;

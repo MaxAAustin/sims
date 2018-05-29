@@ -34,9 +34,10 @@ function draw() {
 
     for (var i = 0; i < attractors.length; i++){
         stroke(0,255,0);
+        strokeWeight(50);
         point(attractors[i].x, attractors[i].y);
     }
-    for (var i = 0; i < particles.length; i++){
+    for (var i = 0; i < 50; i++){
         var particle = particles[i];
         for (var j=0; j< attractors.length; j++){
             particle.attracted(attractors[j]);
