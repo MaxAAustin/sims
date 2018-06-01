@@ -2,94 +2,265 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Michael Austin</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <!--Header Showcase-->
-    <header id="showcase" class="grid">
-        <div class="bg-image" >
+<!--Navbar-->
+<nav class="navbar navbar-dark navbar-expand-md">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="img/octoLogoCrop.png" style="width: 200px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a href="#" class="btn btn-outline-primary active" role="button">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="btn btn-outline-primary" role="button">
+                        Gravity
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary" href="resume.html" role="button">
+                        Eclipse
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseContact" aria-expanded="false" aria-controls="collapseContact">
+                        Solar System
+                    </button>
+                </li>
+                <li class="nav-item nav-link">
+                    <a href="https://github.com/MaxAAustin">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <h1>Welcome to WVU Astronomy Main!</h1>
-        <a href="#" class="btn">
+    </div>
+</nav>
+<div class="collapse text-center" id="collapseContact">
+    <div class="card card-body">
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Phone</strong>: 239-248-1407</li>
+            <li class="list-group-item"><strong>Email</strong>:
+                <a href="mailto:maxaustin92@gmail.com?subject=Website Connection">maxaustin92@gmail.com</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--Carousel-->
+<div class="container">
+    <div class="carousel slide" id="slides" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#slides" data-slide-to="0" class="active"></li>
+            <li data-target="#slides" data-slide-to="1"></li>
+            <li data-target="#slides" data-slide-to="2"></li>
+            <li data-target="#slides" data-slide-to="3"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/galaxyriver.jpg" style="height: 800px">
+            </div>
+            <div class="carousel-item"><img src="img/AmericanEclipse.jpg"
+                                            style="height: 800px"></div>
+            <div class="carousel-item"><img src="img/airglow.jpg"
+                                            style="height: 800px"></div>
+            <div class="carousel-item"><img
+                    src="img/meteor.jpg"
+                                            style="height: 800px"></div>
+        </div>
+        <a class="carousel-control-prev" href="#slides" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
         </a>
-    </header>
-    <nav class="navbar">
+        <a class="carousel-control-next" href="#slides" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+</div>
+<!--Languages Icons-->
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">Social</h1>
+            <hr>
+        </div>
+    </div>
+</div>
+<!--Three Instagram Columns-->
+<div class="container-fluid padding">
+    <div class="row text-center padding">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <!--Instagram Embed-->
+            <blockquote class="instagram-media"
+                        data-instgrm-captioned
+                        data-instgrm-permalink="https://www.instagram.com/p/BjYFvbrH6h2/"
+                        data-instgrm-version="8"
+                        style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                <div style="padding:8px;">
+                    <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:40.0% 0; text-align:center; width:100%;">
+                        <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;">
 
-    </nav>
-    <!--Main Section of Home Page-->
-    <main id="main">
-        <section id="section-a" class="grid">
-            <div class="content-wrap">
-                <h2 class="content-title">Section A</h2>
-                <!--Instagram Embed-->
-                <blockquote class="instagram-media"
-                            data-instgrm-captioned
-                            data-instgrm-permalink="https://www.instagram.com/p/BjYFvbrH6h2/"
-                            data-instgrm-version="8"
-                            style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
-                    <div style="padding:8px;">
-                        <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:40.0% 0; text-align:center; width:100%;">
-                            <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;">
-
-                            </div>
                         </div>
-                        <p style=" margin:8px 0 0 0; padding:0 4px;">
-                            <a href="https://www.instagram.com/p/BjYFvbrH6h2/"
-                               style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;"
-                               target="_blank">@jbath7
-                                taking in the sites of
-                                #Noosa at #night from up at
-                                Tinbeerwah Lookout under the
-                                #MilkyWay. - - - - - - - - -
-                                - #canon #canonaustralia
-                                #samyang #samyang14mm - - -
-                                - - - - - - - #visitnoosa
-                                #relaxationcapital
-                                #visitsunshinecoast
-                                #sunshinecoast
-                                #visitqueensland
-                                #thisisqueensland
-                                #seeaustralia - - - - - - -
-                                - - - Canon 5Dmk IV Samyang
-                                14mm 14mm | f2.8 | 3200 ISO
-                                | 25secs Canon 580 flash
-                                with rubber dome thingie on
-                                it - - - - - - - - - -
-                            </a>
-                        </p>
-                        <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
-                            A post shared by
-                            <a href="https://www.instagram.com/frysteen/"
-                               style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;"
-                               target="_blank">
-                                Sam Frysteen | Australia
-                            </a> (@frysteen) on
-                            <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;"
-                                  datetime="2018-05-29T21:26:59+00:00">
-                                May 29, 2018 at 2:26pm PDT
-                            </time>
-                        </p>
                     </div>
-                </blockquote>
-                <script async defer
-                        src="//www.instagram.com/embed.js"></script>
-            </div>
-        </section>
-        <section id="section-b" class="grid">
-            <div class="content-wrap">
-                <h2 class="content-title">Section B</h2>
-                <!--Twitter Embed-->
-                <a class="twitter-grid" data-lang="en"
-                   data-limit="5"
-                   href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">National
-                    Park Tweets</a>
-                <script async
-                        src="https://platform.twitter.com/widgets.js"
-                        charset="utf-8"></script>
-            </div>
-        </section>
-    </main>
+                    <p style=" margin:8px 0 0 0; padding:0 4px;">
+                        <a href="https://www.instagram.com/p/BjYFvbrH6h2/"
+                           style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;"
+                           target="_blank">@jbath7
+                            taking in the sites of
+                            #Noosa at #night from up at
+                            Tinbeerwah Lookout under the
+                            #MilkyWay. - - - - - - - - -
+                            - #canon #canonaustralia
+                            #samyang #samyang14mm - - -
+                            - - - - - - - #visitnoosa
+                            #relaxationcapital
+                            #visitsunshinecoast
+                            #sunshinecoast
+                            #visitqueensland
+                            #thisisqueensland
+                            #seeaustralia - - - - - - -
+                            - - - Canon 5Dmk IV Samyang
+                            14mm 14mm | f2.8 | 3200 ISO
+                            | 25secs Canon 580 flash
+                            with rubber dome thingie on
+                            it - - - - - - - - - -
+                        </a>
+                    </p>
+                    <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                        A post shared by
+                        <a href="https://www.instagram.com/frysteen/"
+                           style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;"
+                           target="_blank">
+                            Sam Frysteen | Australia
+                        </a> (@frysteen) on
+                        <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;"
+                              datetime="2018-05-29T21:26:59+00:00">
+                            May 29, 2018 at 2:26pm PDT
+                        </time>
+                    </p>
+                </div>
+            </blockquote>
+            <script async defer
+                    src="//www.instagram.com/embed.js">
+
+            </script>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <blockquote class="instagram-media"
+                        data-instgrm-captioned
+                        data-instgrm-permalink="https://www.instagram.com/p/Bjc_CjTnbt2/"
+                        data-instgrm-version="8"
+                        style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                <div style="padding:8px;">
+                    <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:62.5% 0; text-align:center; width:100%;">
+                        <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;">
+
+                        </div>
+                    </div>
+                    <p style=" margin:8px 0 0 0; padding:0 4px;">
+                        <a href="https://www.instagram.com/p/Bjc_CjTnbt2/"
+                           style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;"
+                           target="_blank">
+                            Iceland! Aurora by @se_images .
+                            #ig_auroraborealis For more
+                            magic, check the artist!
+                            _________ Selection by
+                            @torivarnaess
+                        </a>
+                    </p>
+                    <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                        A post shared by
+                        <a href="https://www.instagram.com/ig_auroraborealis/"
+                           style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;"
+                           target="_blank">Aurora Borealis
+                        </a> (@ig_auroraborealis) on
+                        <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;"
+                              datetime="2018-05-31T19:04:38+00:00">
+                            May 31, 2018 at 12:04pm PDT
+                        </time>
+                    </p>
+                </div>
+            </blockquote>
+            <script async defer
+                    src="//www.instagram.com/embed.js"></script>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <blockquote class="instagram-media"
+                        data-instgrm-captioned
+                        data-instgrm-permalink="https://www.instagram.com/p/BjIvvg1lsHf/"
+                        data-instgrm-version="8"
+                        style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                <div style="padding:8px;">
+                    <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50% 0; text-align:center; width:100%;">
+                        <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAMUExURczMzPf399fX1+bm5mzY9AMAAADiSURBVDjLvZXbEsMgCES5/P8/t9FuRVCRmU73JWlzosgSIIZURCjo/ad+EQJJB4Hv8BFt+IDpQoCx1wjOSBFhh2XssxEIYn3ulI/6MNReE07UIWJEv8UEOWDS88LY97kqyTliJKKtuYBbruAyVh5wOHiXmpi5we58Ek028czwyuQdLKPG1Bkb4NnM+VeAnfHqn1k4+GPT6uGQcvu2h2OVuIf/gWUFyy8OWEpdyZSa3aVCqpVoVvzZZ2VTnn2wU8qzVjDDetO90GSy9mVLqtgYSy231MxrY6I2gGqjrTY0L8fxCxfCBbhWrsYYAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div>
+                    </div>
+                    <p style=" margin:8px 0 0 0; padding:0 4px;">
+                        <a href="https://www.instagram.com/p/BjIvvg1lsHf/"
+                           style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;"
+                           target="_blank">Yesterday’s
+                            Falcon 9 launch of five Iridium
+                            satellites and GRACE-FO also
+                            marks SpaceX’s twelfth launch of
+                            a flight-proven rocket.</a></p>
+                    <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+                        A post shared by <a
+                            href="https://www.instagram.com/spacex/"
+                            style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px;"
+                            target="_blank"> SpaceX</a>
+                        (@spacex) on
+                        <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;"
+                              datetime="2018-05-23T22:26:09+00:00">
+                            May 23, 2018 at 3:26pm PDT
+                        </time>
+                    </p>
+                </div>
+            </blockquote>
+            <script async defer
+                    src="//www.instagram.com/embed.js"></script>
+        </div>
+    </div>
+</div>
+<!--Twitter Embed-->
+<div class="content-wrap">
+    <a class="twitter-grid" data-lang="en"
+       data-limit="5"
+       href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">National
+        Park Tweets</a>
+    <script async
+            src="https://platform.twitter.com/widgets.js"
+            charset="utf-8"></script>
+</div>
+
+<!--Connect-->
+
+<!--Footer-->
+<div id="connect" class="card text-center">
+    <div class="card-header" style="font-size: large; font-weight: bold">
+        Connect
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Phone
+        </strong>: (304) 293-3422</li>
+        <li class="list-group-item"><strong>Email</strong>: stdevore@mail.wvu.edu</li>
+    </ul>
+    <div class="card-body">
+        <a href="https://github.com/MaxAAustin"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="https://plus.google.com/u/0/115321186724436531782"><i class="fab fa-twitter"></i></a>
+    </div>
+</div>
+
 </body>
 </html>

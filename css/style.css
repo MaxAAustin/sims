@@ -1,0 +1,96 @@
+/*-- Font Imports --*/
+@font-face {
+    font-family: "Ubuntu-Regular";
+    src: url("fonts/Ubuntu-R.ttf");
+}
+<!-------------------------------------------------------------------------------->
+@font-face {
+    font-family: "Ubuntu-Bold";
+    src: url("fonts/Ubuntu-B.ttf");
+}
+<!-------------------------------------------------------------------------------->
+@font-face {
+    font-family: "Ubuntu-Italic";
+    src: url("fonts/Ubuntu-RI.ttf");
+}
+<!-------------------------------------------------------------------------------->
+
+        /*---Media Queries --*/
+@media (max-width: 992px) {
+
+}
+@media (max-width: 768px) {
+
+}
+@media (max-width: 576px) {
+
+}
+<!-------------------------------------------------------------------------------->
+
+        /*-- Applies to Whole Document --*/
+    * {
+        font-family: Ubuntu-Regular;
+    }
+.navbar {
+    background-color: #D9B08C;
+    color: #d1e8e2;
+    font-size: 1.8em;
+}
+.btn-outline-primary {
+    color: #2C3531;
+    background-color: transparent;
+    background-image: none;
+    border-color: transparent;
+    padding: 15px;
+}
+<!-------------------------------------------------------------------------------->
+
+/*-- Formats Navbar Itself --*/
+
+
+
+
+/*SUPER HELPFUL*/
+/*
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+*/
+
+/*
+Colors Sirin
+Dark Navy/ Almost Black: #2C3531
+Dark Teal/ Dark Blue-Green: #116466
+Dark Tan: #D9B08C
+Light Tans: #FFCB9A
+Ultra-Light Green-Blue: #D1E8E2
+
+**************************************************************
+
+Colors ChordSurfer
+Light Pink-Tan: #EDC7B7
+Light Tan/ Stone: #EEE2DC
+Grey: #BAB2B5
+Dark Navy: #123C69
+Magenta-Red: #AC3B61
+
+**************************************************************
+
+Colors Google Petra Streetview
+Dark Periwinkle: #4285F4
+Dark Brown: #5C2018
+Burnt Orange: #BC4639
+Light Red-Tan: #D4A59A
+Light Tan: #F3E0DC
+*/
