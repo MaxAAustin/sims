@@ -1,11 +1,11 @@
 body {
-    background-color: black;
+    /* background-color: black; */
     margin: 0;
     overflow: hidden;
 }
 
 canvas{
     background: red;
-    height: 700;
-    width: 700;
+    width: 100%;
+    height: 100%;
 }
