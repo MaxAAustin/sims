@@ -5,15 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SimDraw</title>
-    <link href="css/star-formation.css" rel="stylesheet">
+    <link href="star-formation.css" rel="stylesheet">
 </head>
 
 <body>
     <canvas id="protoCanvas"></canvas>
-    <script language="JavaScript" type="text/javascript" src="libs/three.js"></script>
+    <script src="three.js"></script>
     <script>
+        /* Sets up canvas and selects by id from HTML. 
+           Sets background to clear color, gets device resolution, and sets up size of window.
+         */
         var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('#protoCanvas'), antialias: true});
-    
+        renderer.setClearColor(0x00ff00);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        /* Makes a new PerspectiveCamera angled at 35 deg, with an aspect-ratio of w.innerWidth/ w.innerHeight, and the near and far clipping points */
+        var camera = new THREE.PerspectiveCamera(35, window.innerWidth/window.innerHeight, 0.1, 3000);
+
+        // Creates our scene
+        var scene = new THREE.Scene();
+        // Makes a new cube from CubeGeometry and passes in dimensions in pixels. 
+        var geometry = new THREE.CubeGeometry(100, 100, 100);
+        // Renders our scene by passing in our scene and camera variables defined, above.
+        renderer.render(scene, camera); 
     </script>
 
 </body>

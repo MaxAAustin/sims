@@ -6,4 +6,6 @@ body {
 
 canvas{
     background: red;
+    height: 700;
+    width: 700;
 }
