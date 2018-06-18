@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Page Title</title>
+    <title>Planet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/star-formation.css" />
     
@@ -10,18 +10,31 @@
 <body>
     <script src="js/three.js"></script>
     <script src="js/OrbitControls.js"></script>
-    <script src="js/OrbitControls.js"></script>
-    <script src="js/OrbitControls.js"></script>
     <script>
 
         // Sets up/ initializes scene, camera, and renderer, then appends them to the HTML DOM.
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera(75, window.innerWidth/ window.innerHeight, 0.1, 1000);
+        var camera = new THREE.PerspectiveCamera(100, window.innerWidth/ window.innerHeight, 0.1, 1000);
 
-        var renderer = new THREE.WebGLRenderer();
+        var renderer = new THREE.WebGLRenderer({antialias:true});
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        document.body.appendChild( renderer.domElement );
 
+        // Creates the cube/ new object as a wireframe. 
+        var planetgeometry = new THREE.SphereGeometry(100, 25, 25);
+
+        var texture = new THREE.TextureLoader().load( "textures/2k_venus_surface.jpg" );
+        texture.wrapT = THREE.RepeatWrapping;
+
+        // Sets cube color as white and wireframe, then adds it to the scene. 
+        var material = new THREE.MeshBasicMaterial({ map: texture});
+
+        var planet = new THREE.Mesh(planetgeometry, material);
+
+        var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( light );
+        scene.add(planet);
+        camera.position.z = 200;
         // Adds an event listener for resizing the window and updates the aspect ratio of camera and resizes the renderer.
         window.addEventListener('resize', function(){
             var width = window.innerWidth;
@@ -31,28 +44,25 @@
             camera.updateProjectionMatrix();
         });
 
-        // Creates the cube/ new object as a wireframe. 
-        var geometry = new THREE.SphereGeometry(1, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
-
-        // Sets cube color as white and wireframe, then adds it to the scene. 
+        /* // Sets cube color as white and wireframe, then adds it to the scene. 
         var material = new THREE.MeshPhongMaterial({ ambient: 0x050505, color: 0x0033ff, specular: 0x555555, shininess: 30 });
         var cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        scene.add(cube); */
 
         // LIGHT IS CRUCIAL FOR PHONG MATERIAL TO SHOW-UP! Otherwise it is all black!
 
-        var light = new THREE.DirectionalLight( 0xffffff );
+       /*  var light = new THREE.DirectionalLight( 0xffffff );
         light.position.set( 0, 1, 1 ).normalize();
-        scene.add(light);
+        scene.add(light); */
 
         // Relocates the camera. 
-        camera.position.z = 3; 
+         
 
         // Rotates the cube
         var update = function(){
 
-            cube.rotation.x += 0.001;
-            cube.rotation.y += 0.005;
+            planet.rotation.x += 0.001;
+            planet.rotation.y += 0.005;
 
         };
 
