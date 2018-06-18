@@ -10,6 +10,8 @@
 <body>
     <script src="js/three.js"></script>
     <script src="js/OrbitControls.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/OrbitControls.js"></script>
     <script>
 
         // Sets up/ initializes scene, camera, and renderer, then appends them to the HTML DOM.
@@ -33,9 +35,15 @@
         var geometry = new THREE.SphereGeometry(1, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
 
         // Sets cube color as white and wireframe, then adds it to the scene. 
-        var material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
+        var material = new THREE.MeshPhongMaterial({ ambient: 0x050505, color: 0x0033ff, specular: 0x555555, shininess: 30 });
         var cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
+
+        // LIGHT IS CRUCIAL FOR PHONG MATERIAL TO SHOW-UP! Otherwise it is all black!
+
+        var light = new THREE.DirectionalLight( 0xffffff );
+        light.position.set( 0, 1, 1 ).normalize();
+        scene.add(light);
 
         // Relocates the camera. 
         camera.position.z = 3; 
