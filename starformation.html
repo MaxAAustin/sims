@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/star-formation.css" />
+    
+</head>
+<body>
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script>
+
+        // Sets up/ initializes scene, camera, and renderer, then appends them to the HTML DOM.
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth/ window.innerHeight, 0.1, 1000);
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Adds an event listener for resizing the window and updates the aspect ratio of camera and resizes the renderer.
+        window.addEventListener('resize', function(){
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width/height;
+            camera.updateProjectionMatrix();
+        });
+
+        // Creates the cube/ new object as a wireframe. 
+        var geometry = new THREE.SphereGeometry(1, 50, 50, 0, Math.PI * 2, 0, Math.PI * 2);
+
+        // Sets cube color as white and wireframe, then adds it to the scene. 
+        var material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true});
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        // Relocates the camera. 
+        camera.position.z = 3; 
+
+        // Rotates the cube
+        var update = function(){
+
+            cube.rotation.x += 0.001;
+            cube.rotation.y += 0.005;
+
+        };
+
+        var render = function(){
+            renderer.render(scene, camera); 
+        };
+
+        var GameLoop = function(){
+            requestAnimationFrame(GameLoop);
+
+            update();
+            render();
+        };
+
+        GameLoop();
+
+    </script>
+    
+</body>
+</html>
