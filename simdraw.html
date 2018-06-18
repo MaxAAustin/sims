@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimDraw</title>
+    <link href="css/star-formation.css" rel="stylesheet">
+</head>
+
+<body>
+    <script src="libs/three.js-master/build/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script>
+        //Initializes four variables used in init();
+        var mesh, renderer, scene, camera;
+        
+        init();
+        render();
+
+        function init(){
+            //Creates new renderer based on device screen resolution and appends it to the DOM (the HTML doc all this is in).
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            document.body.appendChild(renderer.domElement);
+
+            //Creates a new scene to shove everything in to.
+            scene = new THREE.Scene();
+            
+            //Creates a Perspective Camera (views our scene the way our eyes view normal objects, with objects fading in distance and extremely close) and adds camera to scene.
+            camera = new THREE.PerspectiveCamera( 40, window.innerWidth/window.innerHeight, 1, 1000 );
+            camera.position.set(10, 15, 25);
+            scence.add(camera);
+
+            
+
+            var loader = new THREE.TextureLoader();
+            loader.load('img/', function(texture){
+                var geometry = new THREE.SphereGeometry(1000, 20, 20);
+                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
+                mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+            });
+            
+            //texture.matrixAutoUpdate = false;
+        }
+
+        function render(){
+            renderer.render(scene, camera);
+        }
+    </script> 
+
+</body>
+
+</html>
