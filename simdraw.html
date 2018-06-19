@@ -1,54 +1,105 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SimDraw</title>
-    <link href="css/planets.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            margin: 0px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
     <script src="js/three.js"></script>
+    <script src="js/GPUParticleSystem.js"></script>
     <script>
-        //Initializes four variables used in init();
-        var mesh, renderer, scene, camera;
+
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(28, window.innerWidth / window.innerHeight, 1, 10000);
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        var clock = new THREE.Clock(); 
+        var tick = 0;
+
+        // Sets up/ initializes scene, camera, and container div called "sandbox".
         
-        init();
-        render();
+        camera.position.z = 100;
 
-        function init(){
-            //Creates new renderer based on device screen resolution and appends it to the DOM (the HTML doc all this is in).
-            renderer = new THREE.WebGLRenderer();
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize( window.innerWidth, window.innerHeight );
-            document.body.appendChild(renderer.domElement);
+        var particleSystem = new THREE.GPUParticleSystem({
+            maxParticles: 250000
+        });
+        scene.add(particleSystem);
 
-            //Creates a new scene to shove everything in to.
-            scene = new THREE.Scene();
-            
-            //Creates a Perspective Camera (views our scene the way our eyes view normal objects, with objects fading in distance and extremely close) and adds camera to scene.
-            camera = new THREE.PerspectiveCamera( 40, window.innerWidth/window.innerHeight, 0.1, 1000 );
-            camera.position.set(10, 15, 25);
-            scene.add(camera);
-
-            
-
-            var loader = new THREE.TextureLoader();
-            loader.load('img/Tarantula.jpg', function(texture){
-                var geometry = new THREE.SphereGeometry(1000, 20, 20, 20, 20);
-                var material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
-                mesh = new THREE.Mesh(geometry, material);
-                scene.add(mesh);
-            });
-            
-            //texture.matrixAutoUpdate = false;
+        // Options passed during each spawned
+        var options = {
+            position: new THREE.Vector3(),
+            positionRandomness: .3,
+            velocity: new THREE.Vector3(),
+            velocityRandomness: .5,
+            color: 0x48d1cc,
+            colorRandomness: .2,
+            turbulence: .6,
+            lifetime: 2,
+            size: 5,
+            sizeRandomness: 1
         }
 
-        function render(){
+        var spawnerOptions = {
+            spawnRate: 15000,
+            horizontalSpeed: 1.5,
+            verticalSpeed: 1.33,
+            timeScale: 1
+        }
+
+        // Makes a new WebGLRenderer and adds it to DOM
+
+
+
+
+        window.addEventListener('resize', function () {
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+        function animate() {
+
+
+        }
+        function render() {
             renderer.render(scene, camera);
         }
-    </script> 
+        function GameLoop() {
+            requestAnimationFrame(animate);
+            var delta = clock.getDelta() * spawnerOptions.timeScale;
+            tick += delta;
+            if (tick < 0) tick = 0;
+            if (delta > 0) {
+                options.position.x = Math.sin(tick * spawnerOptions.horizontalSpeed) * 20;
+                options.position.y = Math.sin(tick * spawnerOptions.verticalSpeed) * 10;
+                options.position.z = Math.sin(tick * spawnerOptions.horizontalSpeed + spawnerOptions.verticalSpeed) * 5;
+                for (var x = 0; x < spawnerOptions.spawnRate * delta; x++) {
+                    particleSystem.spawnParticle(options);
+                }
+            }
+            particleSystem.update(tick);
+            render();
+        }
+
+        GameLoop();
+
+    </script>
 
 </body>
 
