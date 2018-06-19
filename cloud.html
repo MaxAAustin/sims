@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/planets.css" />
+
+</head>
+
+<body>
+    <script src="js/three.js"></script>
+    <script>
+        // Crucial variables for rendering a scene.
+        var scene, camera, renderer;
+        // Variables unique to this scene. 
+        var geometry, particleNum, color, size, cloudDensity, cloudColor, parameters = {}, materials = [], particles;
+
+        function init() {
+
+            // Initializes scene and Perspective Camera. 
+            // Camera field of view = 75; aspect-ratio = device-dependent, near-field and far-field cut-offs.
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000);
+
+            // Sets cloud density and background color (black)
+            cloudColor = 0x000000;
+            cloudDensity = 0.0007;
+            camera.position.z = 1700;
+
+            // Makes new exponential fog (grows exponentially denser with distance defined by cloudDensity)
+            scene.fog = new THREE.FogExp2(cloudColor, cloudDensity);
+
+            // Initializes new Geometry object.
+            geometry = new THREE.Geometry();
+
+            // Max number of particles in cloud
+            particleNum = 20000;
+
+            // Assigns random particle location in 3D space as long as total particle count < max
+            for (var i = 0; i < particleNum; i++) {
+                var vertex = new THREE.Vector3();
+                vertex.x = Math.random() * 2000 - 1000;
+                vertex.y = Math.random() * 1000 - 1000;
+                vertex.z = Math.random() * 1500 - 1000;
+
+                geometry.vertices.push(vertex);
+            }
+            // HSL color percentage of 360 as a decimal, hue, saturation, and size (left to right in each row of 2D array)
+            parameters = [
+                [
+                    [1, 1, 0.5], 5
+                ],
+                [
+                    [0.95, 1, 0.5], 4
+                ],
+                [
+                    [0.8, 1, 0.5], 3
+                ],
+                [
+                    [0.85, 1, 0.5], 2
+                ],
+                [
+                    [0.6, 1, 0.5], 1
+                ]
+
+            ];
+            // Sets Material color and size properties for point and adds to scene. 
+            for (var i = 0; i < parameters.length; i++) {
+                color = parameters[i][0];
+                size = parameters[i][1];
+
+                materials[i] = new THREE.PointsMaterial(
+                    { size: size }
+                );
+                particles = new THREE.Points(geometry, materials[i]);
+
+                particles.rotation.x = Math.random() * 6;
+                particles.rotation.y = Math.random() * 6;
+
+                scene.add(particles);
+            }
+
+            // Renders the scene with ~20,000 particles and appends render to DOM
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            document.body.appendChild( renderer.domElement );
+
+            // Adds a resize event listener in case user shrinks window.
+            window.addEventListener('resize', function () {
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
+        }
+
+        // Animates and renders scene. 
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        // Renders the scene. 
+        function render() {
+            var tick = Date.now() * 0.00005;
+
+            camera.lookAt(scene.position);
+            // Rotates point clouds 
+            for(var i = 0; i < scene.children.length; i++){
+
+                var object = scene.children[i];
+
+                if(object instanceof THREE.Points){
+                    object.rotation.y = tick * (i < 4 ? i + 1: -(i + 1));
+                }
+            }
+            // Sets HSL color based on values stored in material array. 
+            for(var i = 0; i < materials.length; i++){
+                color = parameters[i][0];
+
+                var deg = (360 * (color[0] + tick) % 360) / 360;
+                materials[i].color.setHSL(deg, color[1], color[2]);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        init();
+        animate();
+    </script>
+
+</body>
+
+</html>
