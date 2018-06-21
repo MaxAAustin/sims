@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Jet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/planets.css" />
+
+</head>
+
+<body>
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/GPUParticleSystem.js"></script>
+    <script>
+        // Crucial variables for rendering a scene, and controlling how we view it.
+        var scene, camera, renderer, controls;
+        // Variables unique to this scene. 
+        var particleStream, options, spawnerOptions, tick = 0;
+
+        var clock = new THREE.Clock(true);
+
+        function initJet() {
+
+            // Initializes scene and Perspective Camera. 
+            // Camera field of view = 75; aspect-ratio = device-dependent, near-field and far-field cut-offs.
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 3000);
+
+            // Sets initial camera position. 
+            //camera.position.y = 700;
+            camera.position.z = 100;
+
+            // Initializes new GPUParticleSystem with max num of particles
+            particleStream = new THREE.GPUParticleSystem({ maxParticles: 250000 });
+
+
+            scene.add(particleStream);
+
+            options = {
+                position: new THREE.Vector3(),
+                positionRandomness: 0.1,
+                velocity: new THREE.Vector3(),
+                velocityRandomness: 0.2,
+                color: 0x48D1CC,
+                colorRandomness: 0,
+                turbulence: 3,
+                lifetime: 5,
+                size: 10,
+                sizeRandomness: 1
+            };
+
+            spawnerOptions = {
+                spawnRate: 16000,
+                horizontalSpeed: 1,
+                verticalSpeed: 1.2,
+                timeScale: 1
+            };
+
+
+
+            // Renders the scene with ~20,000 particles and appends render to DOM
+            renderer = new THREE.WebGLRenderer({antialias:true});
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            document.body.appendChild(renderer.domElement);
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+            // Adds a resize event listener in case user shrinks window.
+            window.addEventListener('resize', function () {
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
+        }
+
+        // Animates and renders scene. 
+        function animate() {
+            requestAnimationFrame(animate);
+            var delta = clock.getDelta() * spawnerOptions.timeScale;
+            tick += delta;
+
+            if(tick < 0) tick = 0;
+
+            if(delta > 0){
+                options.position.x = 0;
+                options.position.y = 0;
+                options.position.z = 0;
+
+                for(var x = 0; x < spawnerOptions.spawnRate * delta; x++){
+
+                    particleStream.spawnParticle(options);
+                }
+            }
+
+            particleStream.update(tick);
+
+            render();
+        }
+
+        // Renders the scene. 
+        function render() {
+
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+
+
+
+        initJet();
+        animateJet();
+    </script>
+
+</body>
+
+</html>

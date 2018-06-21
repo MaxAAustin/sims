@@ -11,11 +11,17 @@
 
 <body>
     <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/GPUParticleSystem.js"></script>
     <script>
-        // Crucial variables for rendering a scene.
-        var scene, camera, renderer;
+        // Crucial variables for rendering a scene, and controlling how we view it.
+        var scene, camera, renderer, controls;
         // Variables unique to this scene. 
         var geometry, particleNum, color, size, cloudDensity, cloudColor, parameters = {}, materials = [], particles;
+
+        var particleStream1, particleStream2, options, spawnerOptions, tick = 0;
+
+        var clock = new THREE.Clock(true);
 
         function init() {
 
@@ -27,23 +33,62 @@
             // Sets cloud density and background color (black)
             cloudColor = 0x000000;
             cloudDensity = 0.0007;
-            camera.position.z = 1700;
 
+            // Sets initial camera position. 
+            camera.position.y = 200;
+            camera.position.z = 800;
             // Makes new exponential fog (grows exponentially denser with distance defined by cloudDensity)
             scene.fog = new THREE.FogExp2(cloudColor, cloudDensity);
+
+             // Initializes new GPUParticleSystem with max num of particles
+             particleStream1 = new THREE.GPUParticleSystem({ maxParticles: 25000 });
+             particleStream2 = new THREE.GPUParticleSystem({ maxParticles: 25000 });
+
+             particleStream1.rotateX(0.785398);
+             particleStream2.rotateX(3.14);
+
+             // Add jet of particles to scene. 
+             scene.add(particleStream1);
+             scene.add(particleStream2);
+
+             // GPUParticleSystem options for particle attributes
+             options = {
+                position: new THREE.Vector3(),
+                positionRandomness: 0,
+                velocity: new THREE.Vector3(),
+                velocityRandomness: 0.25,
+                color: 0x48D1CC,
+                colorRandomness: 0,
+                turbulence: 12,
+                lifetime: 2,
+                size: 50,
+                sizeRandomness: 1,
+                smoothPosition: true
+            };
+
+            spawnerOptions = {
+                spawnRate: 5000,
+                horizontalSpeed: 0,
+                verticalSpeed: 7.5,
+                timeScale: 1
+            };
 
             // Initializes new Geometry object.
             geometry = new THREE.Geometry();
 
             // Max number of particles in cloud
-            particleNum = 20000;
+            particleNum = 2000;
 
-            // Assigns random particle location in 3D space as long as total particle count < max
+            // Initializes angle of particle position (theta) to make cloud circular and how much this angle will change when incremented. 
+            var theta = 0;
+            var dTheta = 2 * Math.PI/1000
+            // Assigns random particle location in 3D space and uses trig to make the cloud circular as long as total particle count < max
             for (var i = 0; i < particleNum; i++) {
+                theta += dTheta;
                 var vertex = new THREE.Vector3();
-                vertex.x = Math.random() * 2000 - 1000;
-                vertex.y = Math.random() * 1000 - 1000;
-                vertex.z = Math.random() * 1500 - 1000;
+                vertex.x = Math.random()*250 * Math.cos(theta); 
+                vertex.y = Math.random()*50;
+                vertex.z = Math.random()*250 * Math.sin(theta);//Math.random() * 1500 - 1000;
 
                 geometry.vertices.push(vertex);
             }
@@ -76,18 +121,20 @@
                 );
                 particles = new THREE.Points(geometry, materials[i]);
 
-                particles.rotation.x = Math.random() * 6;
-                particles.rotation.y = Math.random() * 6;
+                //particles.rotation.x = Math.random() * 2;
+                particles.rotation.y -= 0.05;
 
                 scene.add(particles);
             }
 
+
             // Renders the scene with ~20,000 particles and appends render to DOM
-            renderer = new THREE.WebGLRenderer();
+            renderer = new THREE.WebGLRenderer({antialias:true});
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
 
             document.body.appendChild( renderer.domElement );
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
 
             // Adds a resize event listener in case user shrinks window.
             window.addEventListener('resize', function () {
@@ -102,6 +149,26 @@
         // Animates and renders scene. 
         function animate() {
             requestAnimationFrame(animate);
+            var delta = clock.getDelta() * spawnerOptions.timeScale;
+            tick += delta;
+
+            if(tick < 0) tick = 0;
+
+            if(delta > 0){
+                options.position.x = 0;
+                options.position.y = 0;
+                options.position.z = 0;
+
+                for(var x = 0; x < spawnerOptions.spawnRate * delta; x++){
+
+                    particleStream1.spawnParticle(options);
+                    particleStream2.spawnParticle(options);
+                }
+            }
+
+            particleStream1.update(tick);
+            particleStream2.update(tick);
+
             render();
         }
 
@@ -129,6 +196,8 @@
 
             renderer.render(scene, camera);
         }
+
+
 
         init();
         animate();
