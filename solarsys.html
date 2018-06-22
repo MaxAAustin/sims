@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Solar System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/planets.css" />
+    
+</head>
+<body>
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script>
+
+        // Sets up/ initializes scene, camera, and renderer, then appends them to the HTML DOM.
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(100, window.innerWidth/ window.innerHeight, 0.1, 1000);
+
+        var renderer = new THREE.WebGLRenderer({antialias:true});
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild( renderer.domElement );
+
+        // Creates the celestial body objects as spheres with radius, vertices, etc. 
+        var SunGeo = new THREE.SphereGeometry(277, 25, 25);
+        var MercuryGeo = new THREE.SphereGeometry(1, 25, 25);
+        var VenusGeo = new THREE.SphereGeometry(2.01, 25, 25);
+        var EarthGeo = new THREE.SphereGeometry(2.1, 25, 25);
+        var MarsGeo = new THREE.SphereGeometry(1.09, 25, 25);
+        var JupiterGeo = new THREE.SphereGeometry(23.4, 25, 25);
+        var SaturnGeo = new THREE.SphereGeometry(19.91, 25, 25);
+        var UranusGeo = new THREE.SphereGeometry(8.47, 25, 25);
+        var NeptuneGeo = new THREE.SphereGeometry(10, 25, 25);
+
+        var Sutexture = new THREE.TextureLoader().load( "textures/th_sun.png" );
+        Sutexture.wrapT = THREE.RepeatWrapping;
+        var Metexture = new THREE.TextureLoader().load( "textures/mercury.jpg" );
+        Metexture.wrapT = THREE.RepeatWrapping;
+        var Vtexture = new THREE.TextureLoader().load( "textures/2k_venus_surface.jpg" );
+        Vtexture.wrapT = THREE.RepeatWrapping;
+        var Etexture = new THREE.TextureLoader().load( "textures/Earth.png" );
+        Etexture.wrapT = THREE.RepeatWrapping;
+        var Matexture = new THREE.TextureLoader().load( "textures/Mars_2k.png" );
+        Matexture.wrapT = THREE.RepeatWrapping;
+        var Jtexture = new THREE.TextureLoader().load( "textures/jupiter.png" );
+        Jtexture.wrapT = THREE.RepeatWrapping;
+        var Satexture = new THREE.TextureLoader().load( "textures/th_saturn.png" );
+        Satexture.wrapT = THREE.RepeatWrapping;
+        var Utexture = new THREE.TextureLoader().load( "textures/UranusJVV.png" );
+        Utexture.wrapT = THREE.RepeatWrapping;
+        var Ntexture = new THREE.TextureLoader().load( "textures/neptune.jpg" );
+        Ntexture.wrapT = THREE.RepeatWrapping;
+
+        // Sets cube color as white and wireframe, then adds it to the scene. 
+
+        var Sun = new THREE.Mesh(VenusGeo, new THREE.MeshBasicMaterial({ map: Sutexture}));
+        Sun.position = (0,0,0);
+        var Mercury = new THREE.Mesh(MercuryGeo, new THREE.MeshBasicMaterial({ map: Metexture}));
+        Mercury.position.z = (Sun.position.z + 237);
+        var Venus = new THREE.Mesh(VenusGeo, new THREE.MeshBasicMaterial({ map: Vtexture}));
+        Venus.position.z = (Mercury.position.z + 20);
+        var Earth = new THREE.Mesh(EarthGeo, new THREE.MeshBasicMaterial({ map: Etexture}));
+        Earth.position.z = (Venus.position.z + 20);
+        var Mars = new THREE.Mesh(MarsGeo, new THREE.MeshBasicMaterial({ map: Matexture}));
+        Mars.position.z = (Earth.position.z + 20);
+        var Jupiter = new THREE.Mesh(JupiterGeo, new THREE.MeshBasicMaterial({ map: Jtexture}));
+        Jupiter.position.z = (Mars.position.z + 100);
+        var Saturn = new THREE.Mesh(SaturnGeo, new THREE.MeshBasicMaterial({ map: Satexture}));
+        Saturn.position.z = (Jupiter.position.z + 50);
+        var Uranus = new THREE.Mesh(UranusGeo, new THREE.MeshBasicMaterial({ map: Utexture}));
+        Uranus.position.z = (Saturn.position.z + 50);
+        var Neptune = new THREE.Mesh(NeptuneGeo, new THREE.MeshBasicMaterial({ map: Ntexture}));
+        Neptune.position.z = (Uranus.position.z + 50);
+
+        // Adds a light to the scene.
+        var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+        scene.add( light );
+
+        // Adds all the planets. Should have a loop but...
+        
+        scene.add(Sun);
+        scene.add(Mercury);
+        scene.add(Venus);
+        scene.add(Earth);
+        scene.add(Mars);
+        scene.add(Jupiter);
+        scene.add(Saturn);
+        scene.add(Uranus);
+        scene.add(Neptune);
+
+        camera.position.z = 200;
+        camera.position.x = 200;
+        // Adds an event listener for resizing the window and updates the aspect ratio of camera and resizes the renderer.
+        window.addEventListener('resize', function(){
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width/height;
+            camera.updateProjectionMatrix();
+        });
+
+        /* // Sets cube color as white and wireframe, then adds it to the scene. 
+        var material = new THREE.MeshPhongMaterial({ ambient: 0x050505, color: 0x0033ff, specular: 0x555555, shininess: 30 });
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add(cube); */
+
+        // LIGHT IS CRUCIAL FOR PHONG MATERIAL TO SHOW-UP! Otherwise it is all black!
+
+       /*  var light = new THREE.DirectionalLight( 0xffffff );
+        light.position.set( 0, 1, 1 ).normalize();
+        scene.add(light); */
+
+        // Relocates the camera. 
+         
+
+        // Rotates the planet
+        var update = function(){
+
+            //planet.rotation.x += 0.001;
+            Earth.rotation.y += 0.005;
+
+        };
+
+        var render = function(){
+            renderer.render(scene, camera); 
+        };
+
+        var GameLoop = function(){
+            requestAnimationFrame(GameLoop);
+
+            update();
+            render();
+        };
+
+        GameLoop();
+
+    </script>
+    
+</body>
+</html>
