@@ -10,11 +10,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="js/zoom.js"></script>
     <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <!--Navbar-->
+    <!--Modal Target for Picture Icons in Card Deck-->
+    <!-- Overrides max-size of Bootstrap Modal Dialog and uses default modal actions like close and animate fade-in. -->
+    <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" style="max-width: 1000px!important;" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" class="dataImageZoom" id="dataModalImg" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--Navbar standard throughout website-->
+    <!-- Links to Home, Media, Simulations, and Data Models -->
     <nav id="resume-navbar" class="navbar navbar-dark navbar-expand-md">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
@@ -41,10 +59,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                            <a class="btn btn-outline-primary active" href="dataviz.html" role="button">
-                                Data Science
-                            </a>
-                        </li>
+                        <a class="btn btn-outline-primary active" href="dataviz.html" role="button">
+                            Data Science
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseContact" aria-expanded="false"
                             aria-controls="collapseContact">
@@ -75,25 +93,26 @@
     <!--Simulation Option Cards-->
     <div class="card-deck">
         <div class="card text-white bg-dark mb-3">
-            <img class="card-img-top" src="img/orbit.png">
+            <img class="card-img-top" src="img/orbit.png" data-whatever="data-models/AsterOrbDistMag.png" data-toggle="modal" data-target="#dataModal">
             <div class="card-body">
                 <h5 class="card-title">Asteroid Orbits</h5>
                 <p class="card-text">This scatterplot depicts the minimum orbit intersection distance in AUs as a function of asteroid magnitude.</p>
             </div>
         </div>
         <div class="card text-white bg-dark mb-3">
-                <img class="card-img-top" src="img/asteroidIcon.png">
-                <div class="card-body">
-                    <h5 class="card-title">Asteroid Impacts</h5>
-                    <p class="card-text">This scatterplot depicts asteroid velocity as a function of asteroid magnitude.</p>
-                </div>
+            <img class="card-img-top" src="img/asteroidIcon.png" data-whatever="data-models/AsterVelMag.png" data-toggle="modal"
+                data-target="#dataModal">
+            <div class="card-body">
+                <h5 class="card-title">Asteroid Impacts</h5>
+                <p class="card-text">This scatterplot depicts asteroid velocity as a function of asteroid magnitude.</p>
+            </div>
         </div>
         <div class="card text-white bg-dark mb-3">
-                <img class="card-img-top" src="img/eclipseIcon.png">
-                <div class="card-body">
-                    <h5 class="card-title">Eclipse</h5>
-                    <p class="card-text">This scatterplot depicts the eclipses.</p>
-                </div>
+            <img class="card-img-top" src="img/eclipseIcon.png" data-whatever="data-models/AsterOrbDistMag.png" data-toggle="modal" data-target="#dataModal">
+            <div class="card-body">
+                <h5 class="card-title">Eclipse</h5>
+                <p class="card-text">This scatterplot depicts the eclipses.</p>
+            </div>
         </div>
     </div>
 
